@@ -1,5 +1,7 @@
 import os
+
 from django.db import models
+
 from . import Category
 
 
@@ -8,8 +10,8 @@ class Flower(models.Model):
     Model for Flower
     """
 
-    def get_image_path(instance, filename):
-        return os.path.join('photos', str(instance.id), filename)
+    def get_image_path(self, filename):
+        return os.path.join('photos', str(self.name), filename)
     
     name = models.CharField(max_length=200, null=False, blank=False)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, null=False, blank=False)
