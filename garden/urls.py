@@ -15,10 +15,18 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
+from rest_framework.routers import DefaultRouter
 from django.urls import path
 
 from . import views
 
+garden_router = DefaultRouter(trailing_slash=False)
+
+garden_router.register(
+    r'flowers', views.FlowersViewSet, base_name='flowers')
+garden_router.register(
+    r'categories', views.CategoriesViewSet, base_name='categories')
+
 urlpatterns = [
-    path('flowers', views.FlowersViewSet, name='flowers'),
+    path('garden/', include(garden_router.urls))
 ]

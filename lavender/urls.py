@@ -26,7 +26,7 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/garden/', include('garden.urls')),
+    path('api/', include('garden.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ]
