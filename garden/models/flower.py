@@ -2,7 +2,8 @@ import os
 
 from django.db import models
 
-from . import Category
+from garden.models import Category
+from store.models import Store
 
 
 class Flower(models.Model):
@@ -14,11 +15,12 @@ class Flower(models.Model):
         return os.path.join('photos', str(self.name), filename)
 
     name = models.CharField(max_length=200, null=False, blank=False)
-    category = models.ForeignKey(
-        Category, on_delete=models.PROTECT, null=False, blank=False)
-    picture = models.ImageField(
-        upload_to=get_image_path, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, null=False, blank=False)
+    stores = models.ForeignKey(Category, on_delete=models.PROTECT, null=False, blank=True)
+    picture = models.ImageField(upload_to=get_image_path, null=True, blank=True)
     info = models.TextField(null=True, blank=True)
+
+
 
     def __str__(self):
         return self.name
